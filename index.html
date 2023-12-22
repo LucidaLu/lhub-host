@@ -1,0 +1,90 @@
+<head>
+  <title>LIYU-HUB</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      height: 100vh;
+      margin: 0;
+    }
+
+    #wrap {
+      text-align: center;
+    }
+
+    #window {
+      width: 90vw;
+      height: 80vh;
+    }
+
+    #url {
+      width: 40vw;
+    }
+
+    #func {
+      padding-bottom: 20px;
+    }
+
+    #window {
+      visibility: hidden;
+    }
+  </style>
+  <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="wrap">
+    <h1>
+      LIYU-HUB
+    </h1>
+    <div id="func">
+      <input id="url">
+      <button onclick="work(true)">下载</button>
+      <button onclick="work(false)">打开</button>
+      <button onclick="getpass()">重输口令</button>
+    </div>
+
+    <iframe id="window" onload="done_load()">
+
+    </iframe>
+  </div>
+
+
+  <script>
+    let server_addr = "http://localhost:8080";
+
+    function getpass() {
+      localStorage.setItem("pass", prompt("请输入口令", ""));
+    }
+
+    function done_load() {
+      document.body.style.cursor = 'default';
+      if ($('#window').attr("src")) {
+        $('#window').css("visibility", "visible");
+      }
+    }
+
+    function work(file) {
+      console.log(file, $("#url").val());
+      let url = $("#url").val();
+      if (url != "") {
+        if (!localStorage.getItem("pass"))
+          getpass();
+        let qurl = server_addr + `/download?pass=${localStorage.getItem("pass")}&url=${btoa(url)}&file=${file ? 1 : 0}`
+        if (file) {
+          window.open(qurl);
+        } else {
+          console.log(qurl);
+          document.body.style.cursor = 'wait';
+          $('#window').css("visibility", "hidden");
+          $('#window').attr("src", qurl);
+        }
+      }
+
+
+      // convert url to base64
+      $("#url").val("");
+    }
+  </script>
+</body>
