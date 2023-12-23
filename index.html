@@ -52,7 +52,7 @@
 
 
   <script>
-    let server_addr = "http://magic-host.yiren.lu:9202";
+    let server_addr = "http://82.156.12.45:9202";
 
     function getpass() {
       localStorage.setItem("pass", prompt("请输入口令", ""));
@@ -71,7 +71,7 @@
       if (url != "") {
         if (!localStorage.getItem("pass"))
           getpass();
-        let qurl = server_addr + `/download?pass=${localStorage.getItem("pass")}&url=${btoa(url)}&file=${file ? 1 : 0}`
+        let qurl = server_addr + `/magic?pass=${localStorage.getItem("pass")}&url=${btoa(url)}&file=${file ? 1 : 0}`
         if (file) {
           window.open(qurl);
         } else {
