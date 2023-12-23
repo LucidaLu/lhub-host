@@ -11,6 +11,7 @@
 
     #wrap {
       text-align: center;
+      width: 100%;
     }
 
     #window {
@@ -29,16 +30,22 @@
     #window {
       visibility: hidden;
     }
+
+    body {
+      background-color: rgb(63, 63, 63);
+    }
   </style>
   <script src="./jquery.min.js"></script>
 </head>
 
 <body>
   <div id="wrap">
-    <h1>
-      LIYU-HUB
+    <h1 style="width: 100%; background-color: black;margin: 0;padding: 20px;">
+      <!-- LIYU-HUB -->
+      <img src="badge.jpg" style="width: 200px;">
     </h1>
-    <div id="func">
+
+    <div id="func" style="width: 100%; background-color: black;margin: 0;">
       <input id="url">
       <button onclick="work(true)">下载</button>
       <button onclick="work(false)">打开</button>
